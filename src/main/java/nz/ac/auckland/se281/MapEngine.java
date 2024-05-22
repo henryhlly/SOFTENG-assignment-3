@@ -14,7 +14,10 @@ public class MapEngine {
   private void loadMap() {
     List<String> countries = Utils.readCountries();
     List<String> adjacencies = Utils.readAdjacencies();
-    // add code here to create your data structures
+
+    for (String countryName : countries) {
+      Country newCountry = new Country(countryName);
+    }
   }
 
   /** this method is invoked when the user run the command info-country. */
