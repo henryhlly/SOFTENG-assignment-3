@@ -30,6 +30,14 @@ public class Country {
     return name;
   }
 
+  public String getContinent() {
+    return continent;
+  }
+
+  public String getTax() {
+    return String.valueOf(tax);
+  }
+
   @Override
     public int hashCode() {
         final int prime = 31;
