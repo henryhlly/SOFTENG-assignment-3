@@ -16,7 +16,10 @@ public class WorldMap {
     adjCountries.putIfAbsent(country, new ArrayList<>());
   }
 
-  public void addNeighbour() {
-    
+  public void addNeighbour(Country country1, Country country2) {
+    addCountry(country1);
+    addCountry(country2);
+    adjCountries.get(country1).add(country2);
+    adjCountries.get(country2).add(country1);
   }
 }
