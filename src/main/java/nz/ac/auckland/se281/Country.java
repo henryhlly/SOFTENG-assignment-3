@@ -6,6 +6,10 @@ public class Country {
   private String continent;
   private int tax;
 
+  public Country(int id) {
+    this.id = id;
+  }
+  
   public Country(int id, String name, String continent, String tax) {
     this.id = id;
     this.name = name;
@@ -20,6 +24,10 @@ public class Country {
     catch (Exception e) {
       return -1;
     }
+  }
+
+  public String getName() {
+    return name;
   }
 
   @Override
@@ -38,6 +46,13 @@ public class Country {
             return false;
         if (getClass() != obj.getClass())
             return false;
+        Country other = (Country) obj;
+        if (id == -1) {
+          if (other.id != -1)
+            return false;
+        } else if (!(id == other.id)){
+          return false;
+        }
         return true;
     }
 }
