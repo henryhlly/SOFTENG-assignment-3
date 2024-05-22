@@ -5,10 +5,6 @@ public class Country {
   private String name;
   private String continent;
   private int tax;
-
-  public Country(int id) {
-    this.id = id;
-  }
   
   public Country(int id, String name, String continent, String tax) {
     this.id = id;

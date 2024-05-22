@@ -1,7 +1,6 @@
 package nz.ac.auckland.se281;
 
 import java.util.List;
-import java.util.ArrayList;
 
 /** This class is the main entry point. */
 public class MapEngine {
@@ -52,6 +51,12 @@ public class MapEngine {
     }
   }
 
+  /**
+   * A method to check that the user has inputted a valid country.
+   *
+   * @param inputCountry the input that was received from user
+   * @return the country that user is referring to
+   */
   public Country checkCountryInput(String inputCountry) {
     Country c = worldMap.getCountry(inputCountry);
     if (c == null) {
