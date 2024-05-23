@@ -30,8 +30,8 @@ public class Country {
     return continent;
   }
 
-  public String getTax() {
-    return String.valueOf(tax);
+  public int getTax() {
+    return tax;
   }
   
   @Override 

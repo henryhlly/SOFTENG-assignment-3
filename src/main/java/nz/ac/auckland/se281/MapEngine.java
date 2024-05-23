@@ -37,11 +37,39 @@ public class MapEngine {
 
   /** this method is invoked when the user run the command info-country. */
   public void showInfoCountry() {
-    Country country = getUserInputCountry(MessageCli.INSERT_COUNTRY.getMessage());
-    MessageCli.COUNTRY_INFO.printMessage(country.getName(), country.getContinent(), country.getTax());
+    Country country = getCountryInput(MessageCli.INSERT_COUNTRY.getMessage());
+    MessageCli.COUNTRY_INFO.printMessage(country.getName(), country.getContinent(), String.valueOf(country.getTax()));
   }
 
-  public Country getUserInputCountry(String initialMessage) {
+  /** this method is invoked when the user run the command route. */
+  public void showRoute() {
+    Country source;
+    Country destination;
+
+    // Get valid starting country
+    source = getCountryInput(MessageCli.INSERT_SOURCE.getMessage());
+    
+    // Get valid destination country
+    destination = getCountryInput(MessageCli.INSERT_DESTINATION.getMessage());
+
+    if (source == destination) {
+      MessageCli.NO_CROSSBORDER_TRAVEL.printMessage();
+    } else {
+      System.out.println("working");
+      List<Country> shortestRoute = worldMap.findRoute(source, destination);
+      Set<String> visitedContinents = new LinkedHashSet<>();
+
+      for (Country c : shortestRoute) {
+        visitedContinents.add(c.getContinent());
+      }
+
+      MessageCli.ROUTE_INFO.printMessage(shortestRoute.toString());
+      MessageCli.CONTINENT_INFO.printMessage(visitedContinents.toString());
+      MessageCli.TAX_INFO.printMessage(String.valueOf(calculateTax(shortestRoute)));
+    }
+  }
+
+  public Country getCountryInput(String initialMessage) {
     System.out.println(initialMessage);
 
     while (true) {
@@ -74,31 +102,13 @@ public class MapEngine {
     }
   }
 
-  /** this method is invoked when the user run the command route. */
-  public void showRoute() {
-    Country source;
-    Country destination;
-
-    // Get valid starting country
-    source = getUserInputCountry(MessageCli.INSERT_SOURCE.getMessage());
-    
-    // Get valid destination country
-    destination = getUserInputCountry(MessageCli.INSERT_DESTINATION.getMessage());
-
-    if (source == destination) {
-      MessageCli.NO_CROSSBORDER_TRAVEL.printMessage();
-    } else {
-      System.out.println("working");
-      List<Country> shortestRoute = worldMap.findRoute(source, destination);
-      Set<String> visitedContinents = new LinkedHashSet<>();
-
-      for (Country c : shortestRoute) {
-        visitedContinents.add(c.getContinent());
-      }
-
-      MessageCli.ROUTE_INFO.printMessage(shortestRoute.toString());
-      MessageCli.CONTINENT_INFO.printMessage(visitedContinents.toString());
+  public int calculateTax(List<Country> route) {
+    int total = 0;
+    // Skip first one since it doesn't count
+    for (int i = 1; i < route.size(); i++) {
+      total = total + route.get(i).getTax();
     }
+    return total;
   }
 
   
