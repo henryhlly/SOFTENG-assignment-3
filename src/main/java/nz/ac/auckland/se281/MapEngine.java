@@ -55,7 +55,6 @@ public class MapEngine {
     if (source == destination) {
       MessageCli.NO_CROSSBORDER_TRAVEL.printMessage();
     } else {
-      System.out.println("working");
       List<Country> shortestRoute = worldMap.findRoute(source, destination);
       Set<String> visitedContinents = new LinkedHashSet<>();
 
