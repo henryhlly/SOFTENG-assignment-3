@@ -74,5 +74,5 @@ public class WorldMap {
     }
     // Destination was not reached.
     return null;
- }
+  }
 }

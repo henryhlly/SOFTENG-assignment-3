@@ -33,6 +33,11 @@ public class Country {
   public String getTax() {
     return String.valueOf(tax);
   }
+  
+  @Override 
+  public String toString() {
+    return name;
+  }
 
   @Override
     public int hashCode() {

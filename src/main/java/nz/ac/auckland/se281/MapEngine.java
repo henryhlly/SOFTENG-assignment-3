@@ -1,6 +1,8 @@
 package nz.ac.auckland.se281;
 
 import java.util.List;
+import java.util.Set;
+import java.util.LinkedHashSet;
 
 /** This class is the main entry point. */
 public class MapEngine {
@@ -35,23 +37,8 @@ public class MapEngine {
 
   /** this method is invoked when the user run the command info-country. */
   public void showInfoCountry() {
-    MessageCli.INSERT_COUNTRY.printMessage();
-    // Get valid user input
-    while (true) {
-      String input = Utils.scanner.nextLine();
-      String capInput = Utils.capitalizeFirstLetterOfEachWord(input);
-      
-      try {
-        // Output info when country is found.
-        Country country = checkCountryInput(capInput);
-        MessageCli.COUNTRY_INFO.printMessage(country.getName(), country.getContinent(), country.getTax());
-        break;
-      }
-      catch (InvalidCountryException e) {
-        // When user inputs a country not in worldMap
-        MessageCli.INVALID_COUNTRY.printMessage(capInput);
-      }
-    }
+    Country country = getUserInputCountry(MessageCli.INSERT_COUNTRY.getMessage());
+    MessageCli.COUNTRY_INFO.printMessage(country.getName(), country.getContinent(), country.getTax());
   }
 
   public Country getUserInputCountry(String initialMessage) {
@@ -93,11 +80,25 @@ public class MapEngine {
     Country destination;
 
     // Get valid starting country
-    MessageCli.INSERT_SOURCE.printMessage();
+    source = getUserInputCountry(MessageCli.INSERT_SOURCE.getMessage());
     
-
     // Get valid destination country
-    MessageCli.INSERT_DESTINATION.printMessage();
+    destination = getUserInputCountry(MessageCli.INSERT_DESTINATION.getMessage());
+
+    if (source == destination) {
+      MessageCli.NO_CROSSBORDER_TRAVEL.printMessage();
+    } else {
+      System.out.println("working");
+      List<Country> shortestRoute = worldMap.findRoute(source, destination);
+      Set<String> visitedContinents = new LinkedHashSet<>();
+
+      for (Country c : shortestRoute) {
+        visitedContinents.add(c.getContinent());
+      }
+
+      MessageCli.ROUTE_INFO.printMessage(shortestRoute.toString());
+      MessageCli.CONTINENT_INFO.printMessage(visitedContinents.toString());
+    }
   }
 
   
