@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Set;
 import java.util.HashSet;
+import java.util.Collections;
 
 public class WorldMap {
   private Map<Country, List<Country>> adjCountries;
@@ -50,16 +51,20 @@ public class WorldMap {
         Country currentCountry = queue.poll();
         for (Country neighbour : adjCountries.get(currentCountry)) {
             if (neighbour.equals(end)) {
+
                 // Destination detected
+                // Create and fill the shortest route
                 List<Country> shortestRoute = new LinkedList<>();
-                // Add destination to route
                 shortestRoute.add(neighbour);
                 Country nextCountry = currentCountry;
-                // Loop until start is reached again
                 while (nextCountry != null) {
                   shortestRoute.add(nextCountry);
                   nextCountry = neighbourMap.get(nextCountry);
                 }
+                // Reverse the route because it is backwards
+                Collections.reverse(shortestRoute);
+                return shortestRoute;
+
             } else if (!visited.contains(neighbour)) {
               visited.add(neighbour);
               queue.add(neighbour);
@@ -67,6 +72,7 @@ public class WorldMap {
             }
         }
     }
+    // Destination was not reached.
     return null;
  }
 }

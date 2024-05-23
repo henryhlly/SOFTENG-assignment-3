@@ -15,7 +15,6 @@ public enum MessageCli {
   INVALID_COUNTRY("ERROR! This country was not found: %s, try again!"),
   COUNTRY_INFO("%s => continent: %s, tax fees: %s"),
   // TASK 2
-
   INSERT_SOURCE("Insert the name of the country where you start the journey: "),
   INSERT_DESTINATION("Insert the name of the country of destination: "),
   NO_CROSSBORDER_TRAVEL("No cross-border travel is required!"),

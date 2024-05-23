@@ -36,22 +36,43 @@ public class MapEngine {
   /** this method is invoked when the user run the command info-country. */
   public void showInfoCountry() {
     MessageCli.INSERT_COUNTRY.printMessage();
+    // Get valid user input
     while (true) {
       String input = Utils.scanner.nextLine();
       String capInput = Utils.capitalizeFirstLetterOfEachWord(input);
       
       try {
+        // Output info when country is found.
         Country country = checkCountryInput(capInput);
         MessageCli.COUNTRY_INFO.printMessage(country.getName(), country.getContinent(), country.getTax());
         break;
       }
       catch (InvalidCountryException e) {
+        // When user inputs a country not in worldMap
         MessageCli.INVALID_COUNTRY.printMessage(capInput);
       }
     }
   }
 
-  /**
+  public Country getUserInputCountry(String initialMessage) {
+    System.out.println(initialMessage);
+
+    while (true) {
+      String input = Utils.scanner.nextLine();
+      String capInput = Utils.capitalizeFirstLetterOfEachWord(input);
+
+      try {
+        // Return the country that user is asking for
+        return checkCountryInput(capInput);
+      }
+      catch (InvalidCountryException e) {
+        // When user inputs a country not in worldMap
+        MessageCli.INVALID_COUNTRY.printMessage(capInput);
+      }
+    }
+  }
+
+    /**
    * A method to check that the user has inputted a valid country.
    *
    * @param inputCountry the input that was received from user
@@ -67,7 +88,17 @@ public class MapEngine {
   }
 
   /** this method is invoked when the user run the command route. */
-  public void showRoute() {}
+  public void showRoute() {
+    Country source;
+    Country destination;
+
+    // Get valid starting country
+    MessageCli.INSERT_SOURCE.printMessage();
+    
+
+    // Get valid destination country
+    MessageCli.INSERT_DESTINATION.printMessage();
+  }
 
   
 }
