@@ -23,6 +23,10 @@ public class WorldMap {
 
   public void addNeighbour(Country country1, Country country2) {
     adjCountries.get(country1).add(country2);
+
+    if (country1.equals(getCountry("Yakutsk"))) {
+      System.out.println(adjCountries.get(getCountry("Ukraine")));
+    }
   }
 
   public Country getCountry(String countryName) {
@@ -47,27 +51,25 @@ public class WorldMap {
     while (!queue.isEmpty()) {
         Country currentCountry = queue.poll();
         for (Country neighbour : adjCountries.get(currentCountry)) {
-
-          if (!visited.contains(neighbour)) {
-            visited.add(neighbour);
-            queue.add(neighbour);
-            neighbourMap.put(neighbour, currentCountry);
-          } else if (neighbour.equals(end)) {
+          if (neighbour.equals(end)) {
             // Destination detected
             // Create and fill the shortest route
             List<Country> shortestRoute = new LinkedList<>();
             shortestRoute.add(neighbour);
-            Country nextCountry = currentCountry;
-            while (nextCountry != null) {
-              shortestRoute.add(nextCountry);
-              nextCountry = neighbourMap.get(nextCountry);
+            Country country = currentCountry;
+            while (country != null) {
+              shortestRoute.add(country);
+              country = neighbourMap.get(country);
             }
             // Reverse the route because it is backwards
             Collections.reverse(shortestRoute);
-
             return shortestRoute;
 
-            } 
+          } else if (!visited.contains(neighbour)) {
+            visited.add(neighbour);
+            queue.add(neighbour);
+            neighbourMap.put(neighbour, currentCountry);
+          }
         }
     }
     // Destination was not reached.
