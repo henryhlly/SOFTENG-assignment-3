@@ -22,10 +22,7 @@ public class WorldMap {
   }
 
   public void addNeighbour(Country country1, Country country2) {
-    addCountry(country1);
-    addCountry(country2);
     adjCountries.get(country1).add(country2);
-    adjCountries.get(country2).add(country1);
   }
 
   public Country getCountry(String countryName) {
@@ -39,7 +36,7 @@ public class WorldMap {
   }
 
   public List<Country> findRoute(Country start, Country end) {
-    List<Country> visited = new LinkedList<>();
+    Set<Country> visited = new LinkedHashSet<>();
     Map<Country, Country> neighbourMap = new HashMap<>();
     Queue<Country> queue = new LinkedList<>();  
 

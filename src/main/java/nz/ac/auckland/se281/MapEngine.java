@@ -29,6 +29,7 @@ public class MapEngine {
     // Add the corresponding neighbours to the Map
     for (String adjString : adjacencies) {
       String[] listOfNeighbours = adjString.split(",");
+
       for (int i = 1; i < listOfNeighbours.length; i++) {
         worldMap.addNeighbour(worldMap.getCountry(listOfNeighbours[0]), worldMap.getCountry(listOfNeighbours[i]));
       }
