@@ -1,15 +1,23 @@
 package nz.ac.auckland.se281;
 
-import java.util.Map;
-import java.util.Queue;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.ArrayList;
+import java.util.Map;
+import java.util.Queue;
 import java.util.Set;
-import java.util.LinkedHashSet;
-import java.util.Collections;
 
+
+
+/**
+ * A class that represents the graph of the all the countries and their
+ * connections. It also contains all the methods that deal with the graph.
+ *
+ * @author Henry Ly
+ */
 public class WorldMap {
   private Map<Country, List<Country>> adjCountries;
 
@@ -19,7 +27,7 @@ public class WorldMap {
   }
 
   /**
-   * A method that adds a new unique country as a key to the adjacency map
+   * A method that adds a new unique country as a key to the adjacency map.
    *
    * @param country the country that we want to add to the adjacency map
    */
@@ -28,7 +36,7 @@ public class WorldMap {
   }
 
   /**
-   * A method that adds a country as a value to a chosen key for the adjacency map
+   * A method that adds a country as a value to a chosen key for the adjacency map.
    *
    * @param country1 the key for which country2 needs to be stored
    * @param country2 the value that needs to be stored in the arraylist for country1

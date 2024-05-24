@@ -1,14 +1,20 @@
 package nz.ac.auckland.se281;
 
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.LinkedHashSet;
+
 
 /** This class is the main entry point. */
 public class MapEngine {
 
-  WorldMap worldMap;
+  private WorldMap worldMap;
 
+  /**
+   * A constructor method that initialises the map as a worldMap object
+   *
+   * @author Henry Ly
+   */
   public MapEngine() {
     // Generate the worldMap
     worldMap = new WorldMap();
@@ -25,7 +31,14 @@ public class MapEngine {
     for (String c : countries) {
       String[] countryData = c.split(",");
       // Parameters: id = index of country, name = [0], continent = [1], tax = [2]
-      worldMap.addCountry(new Country(countries.indexOf(c), countryData[0], countryData[1], countryData[2]));
+      worldMap.addCountry(
+        new Country(
+          countries.indexOf(c), 
+          countryData[0], 
+          countryData[1], 
+          countryData[2]
+        )
+      );
     }
 
     // Add the corresponding neighbours to the Map
@@ -33,7 +46,10 @@ public class MapEngine {
       String[] listOfNeighbours = adjString.split(",");
 
       for (int i = 1; i < listOfNeighbours.length; i++) {
-        worldMap.addNeighbour(worldMap.getCountry(listOfNeighbours[0]), worldMap.getCountry(listOfNeighbours[i]));
+        worldMap.addNeighbour(
+          worldMap.getCountry(listOfNeighbours[0]), 
+          worldMap.getCountry(listOfNeighbours[i])
+        );
       }
     }
   }
@@ -42,7 +58,11 @@ public class MapEngine {
   public void showInfoCountry() {
     // Get country and then show its information
     Country country = getCountryInput(MessageCli.INSERT_COUNTRY.getMessage());
-    MessageCli.COUNTRY_INFO.printMessage(country.toString(), country.getContinent(), String.valueOf(country.getTax()));
+    MessageCli.COUNTRY_INFO.printMessage(
+      country.toString(), 
+      country.getContinent(), 
+      String.valueOf(country.getTax())
+    );
   }
 
   /** this method is invoked when the user run the command route. */
@@ -78,7 +98,8 @@ public class MapEngine {
    * A method to simplify the process of getting input. It will repeated ask the user
    * for a country until it gets a valid country that is registered in worldMap.
    *
-   * @param initialMessage the initial message that wants to be displayed to user before getting feedback
+   * @param initialMessage the initial message that wants to be displayed to user 
+   * before getting feedback
    * @return the country instance that user was inputting.
    */
   public Country getCountryInput(String initialMessage) {

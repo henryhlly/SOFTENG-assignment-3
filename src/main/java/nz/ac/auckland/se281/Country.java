@@ -1,12 +1,26 @@
 package nz.ac.auckland.se281;
 
+/**
+ * A class that represents the Country object. Stores all the info
+ * that a country needs to have. With custom hashcode generation and
+ * equals method.
+ *
+ * @author Henry Ly
+ */
 public class Country {
   private int id;
   private String name;
   private String continent;
   private int tax;
   
-  // Constructor to initialise all the instance fields of Country object
+  /**
+   * A constructor method to initialise all the instance fields in Country.
+   *
+   * @param id the unique ID of the country
+   * @param name the name of the country
+   * @param continent the continent that the country is in
+   * @param tax the tax fees of the country
+   */
   public Country(int id, String name, String continent, String tax) {
     this.id = id;
     this.name = name;
@@ -46,28 +60,31 @@ public class Country {
   }
 
   @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + id;
-        return result;
-    }
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + id;
+    return result;
+  }
 
   @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Country other = (Country) obj;
-        if (id == -1) {
-          if (other.id != -1)
-            return false;
-        } else if (!(id == other.id)){
-          return false;
-        }
-        return true;
+  public boolean equals(Object obj) {
+    if (this == obj) {
+      return true;
     }
+    if (obj == null) {
+      return false;
+    }
+    if (getClass() != obj.getClass()) {
+      return false;
+    }
+    Country other = (Country) obj;
+    // Only need to compare ids
+    if (id != other.id) {
+      return false;
+    }
+    return true;
+  }
+
+  
 }
