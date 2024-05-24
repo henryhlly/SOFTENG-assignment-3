@@ -37,9 +37,8 @@ public class Country {
    */
   public int toInteger(String str) {
     try {
-       return Integer.parseInt(str);
-    }
-    catch (Exception e) {
+      return Integer.parseInt(str);
+    } catch (Exception e) {
       return -1;
     }
   }

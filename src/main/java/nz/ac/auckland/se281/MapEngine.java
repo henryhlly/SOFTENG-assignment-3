@@ -11,7 +11,7 @@ public class MapEngine {
   private WorldMap worldMap;
 
   /**
-   * A constructor method that initialises the map as a worldMap object
+   * A constructor method that initialises the map as a worldMap object.
    *
    * @author Henry Ly
    */
@@ -47,8 +47,8 @@ public class MapEngine {
 
       for (int i = 1; i < listOfNeighbours.length; i++) {
         worldMap.addNeighbour(
-          worldMap.getCountry(listOfNeighbours[0]), 
-          worldMap.getCountry(listOfNeighbours[i])
+            worldMap.getCountry(listOfNeighbours[0]), 
+            worldMap.getCountry(listOfNeighbours[i])
         );
       }
     }
@@ -59,9 +59,9 @@ public class MapEngine {
     // Get country and then show its information
     Country country = getCountryInput(MessageCli.INSERT_COUNTRY.getMessage());
     MessageCli.COUNTRY_INFO.printMessage(
-      country.toString(), 
-      country.getContinent(), 
-      String.valueOf(country.getTax())
+        country.toString(), 
+        country.getContinent(), 
+        String.valueOf(country.getTax())
     );
   }
 
@@ -99,7 +99,7 @@ public class MapEngine {
    * for a country until it gets a valid country that is registered in worldMap.
    *
    * @param initialMessage the initial message that wants to be displayed to user 
-   * before getting feedback
+   *  before getting feedback
    * @return the country instance that user was inputting.
    */
   public Country getCountryInput(String initialMessage) {
@@ -113,8 +113,7 @@ public class MapEngine {
       try {
         // Return the country that user is asking for
         return checkCountryInput(capInput);
-      }
-      catch (InvalidCountryException e) {
+      } catch (InvalidCountryException e) {
         // When user inputs a country not in worldMap
         MessageCli.INVALID_COUNTRY.printMessage(capInput);
       }
