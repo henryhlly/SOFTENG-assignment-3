@@ -48,8 +48,7 @@ public class WorldMap {
    * Country instance with the same name.
    *
    * @param countryName the string with the name of the country
-   * @return the corresponding Country instance, returns null if country is not in 
-   *  the adjacency map
+   * @return the corresponding Country instance, returns null if country is not in the adjacency map
    */
   public Country getCountry(String countryName) {
     // Check through all keys in adjacency map to see if country exists
@@ -67,8 +66,7 @@ public class WorldMap {
    *
    * @param start the country that the route starts at
    * @param end the country that the route need to end at
-   * @return the route as an ordered list of countries starting at 'start' and 
-   *  ending at 'end', returns null is there is no possible route from start to end
+   * @return the route as an ordered list of countries, null if no possible route from start to end
    */
   public List<Country> findRoute(Country start, Country end) {
     Set<Country> visited = new LinkedHashSet<>();

@@ -98,8 +98,7 @@ public class MapEngine {
    * A method to simplify the process of getting input. It will repeated ask the user
    * for a country until it gets a valid country that is registered in worldMap.
    *
-   * @param initialMessage the initial message that wants to be displayed to user 
-   *  before getting feedback
+   * @param initialMessage the initial message to be displayed before getting feedback
    * @return the country instance that user was inputting.
    */
   public Country getCountryInput(String initialMessage) {
