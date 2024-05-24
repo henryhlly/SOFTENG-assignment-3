@@ -10,12 +10,14 @@ public class MapEngine {
   WorldMap worldMap;
 
   public MapEngine() {
+    // Generate the worldMap
     worldMap = new WorldMap();
-    loadMap(); // keep this mehtod invocation
+    loadMap(); // keep this method invocation
   }
 
   /** invoked one time only when constracting the MapEngine class. */
   private void loadMap() {
+    // Extract data from csv files
     List<String> countries = Utils.readCountries();
     List<String> adjacencies = Utils.readAdjacencies();
     
@@ -38,8 +40,9 @@ public class MapEngine {
 
   /** this method is invoked when the user run the command info-country. */
   public void showInfoCountry() {
+    // Get country and then show its information
     Country country = getCountryInput(MessageCli.INSERT_COUNTRY.getMessage());
-    MessageCli.COUNTRY_INFO.printMessage(country.getName(), country.getContinent(), String.valueOf(country.getTax()));
+    MessageCli.COUNTRY_INFO.printMessage(country.toString(), country.getContinent(), String.valueOf(country.getTax()));
   }
 
   /** this method is invoked when the user run the command route. */
@@ -53,9 +56,11 @@ public class MapEngine {
     // Get valid destination country
     destination = getCountryInput(MessageCli.INSERT_DESTINATION.getMessage());
 
+    // Deal with equal start and end
     if (source == destination) {
       MessageCli.NO_CROSSBORDER_TRAVEL.printMessage();
     } else {
+      // Deal with route output
       List<Country> shortestRoute = worldMap.findRoute(source, destination);
       Set<String> visitedContinents = new LinkedHashSet<>();
 
@@ -69,9 +74,17 @@ public class MapEngine {
     }
   }
 
+  /**
+   * A method to simplify the process of getting input. It will repeated ask the user
+   * for a country until it gets a valid country that is registered in worldMap.
+   *
+   * @param initialMessage the initial message that wants to be displayed to user before getting feedback
+   * @return the country instance that user was inputting.
+   */
   public Country getCountryInput(String initialMessage) {
     System.out.println(initialMessage);
 
+    // Loop until valid input is provided
     while (true) {
       String input = Utils.scanner.nextLine();
       String capInput = Utils.capitalizeFirstLetterOfEachWord(input);
@@ -87,7 +100,7 @@ public class MapEngine {
     }
   }
 
-    /**
+  /**
    * A method to check that the user has inputted a valid country.
    *
    * @param inputCountry the input that was received from user
@@ -95,6 +108,7 @@ public class MapEngine {
    */
   public Country checkCountryInput(String inputCountry) {
     Country c = worldMap.getCountry(inputCountry);
+    // Throw custom error if user input is invalid
     if (c == null) {
       throw new InvalidCountryException();
     } else {
@@ -102,6 +116,12 @@ public class MapEngine {
     }
   }
 
+  /**
+   * A method to calculate the total tax of a route.
+   *
+   * @param route the list of countries that the method is calculating the tax for
+   * @return the total amount calculated as an integer
+   */
   public int calculateTax(List<Country> route) {
     int total = 0;
     // Skip first one since it doesn't count
