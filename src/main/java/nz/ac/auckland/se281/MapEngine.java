@@ -101,7 +101,7 @@ public class MapEngine {
    * @param initialMessage the initial message to be displayed before getting feedback
    * @return the country instance that user was inputting.
    */
-  public Country getCountryInput(String initialMessage) {
+  private Country getCountryInput(String initialMessage) {
     System.out.println(initialMessage);
 
     // Loop until valid input is provided
@@ -125,7 +125,7 @@ public class MapEngine {
    * @param inputCountry the input that was received from user
    * @return the country that user is referring to
    */
-  public Country checkCountryInput(String inputCountry) {
+  private Country checkCountryInput(String inputCountry) {
     Country c = worldMap.getCountry(inputCountry);
     // Throw custom error if user input is invalid
     if (c == null) {
