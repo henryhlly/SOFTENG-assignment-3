@@ -125,7 +125,7 @@ public class MapEngine {
    * @param inputCountry the input that was received from user
    * @return the country that user is referring to
    */
-  private Country checkCountryInput(String inputCountry) {
+  private Country checkCountryInput(String inputCountry) throws InvalidCountryException {
     Country c = worldMap.getCountry(inputCountry);
     // Throw custom error if user input is invalid
     if (c == null) {

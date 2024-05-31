@@ -6,7 +6,7 @@ package nz.ac.auckland.se281;
  *
  * @author Henry Ly
  */
-public class InvalidCountryException extends RuntimeException {
+public class InvalidCountryException extends Exception {
   // Constructor for the custom exception
   public InvalidCountryException() {
     super("Country not found");
